@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#DFFFD9">
+
+    <!-- Título principal -->
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona una ruta"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp" />
+
+    <!-- Botón para ver la ruta -->
+    <Button
+        android:id="@+id/btnRuta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver ruta Sierra de Guadarrama"
+        android:background="@drawable/button_dark"
+        android:textColor="@android:color/white" />
+
+    <!-- Área que se expande -->
+    <ScrollView
+        android:id="@+id/scrollRuta"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp" />
+    </ScrollView>
+</LinearLayout>

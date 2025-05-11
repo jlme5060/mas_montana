@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Mapa -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Scroll de fauna y flora -->
+    <ScrollView
+        android:id="@+id/fauna_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="#AAFFFFFF"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/info_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <!-- Botones inferiores -->
+    <RelativeLayout
+        android:id="@+id/bottom_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="4dp">
+
+            <Button
+                android:id="@+id/change_map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAMBIAR MAPA"
+                android:textAllCaps="false"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/button_dark"
+                android:textColor="@android:color/white"
+                android:padding="12dp" />
+
+            <Button
+                android:id="@+id/toggle_fauna_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼ Fauna y Flora"
+                android:textAllCaps="false"
+                android:background="@drawable/button_green"
+                android:textColor="@android:color/white"
+                android:padding="12dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
