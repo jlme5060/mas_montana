@@ -78,7 +78,8 @@ dependencies {
     // 🌍 Osmdroid (mapas online tipo OpenStreetMap)
     implementation("org.osmdroid:osmdroid-android:6.1.11")
     implementation(libs.androidx.storage)
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0") // La versión más reciente puede variar, consulta la documentación oficial
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
+    implementation(libs.androidx.cardview) // La versión más reciente puede variar, consulta la documentación oficial
 
     // 🧪 Test
     testImplementation(libs.junit)

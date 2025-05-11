@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5">
 
-    <LinearLayout
+    <!-- Imagen destacada en la parte superior -->
+    <ImageView
+        android:id="@+id/miradorImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen del punto de interés" />
 
-        <TextView
-            android:id="@+id/miradorTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Título"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"
-            android:textColor="#000000" />
+    <!-- Contenedor inferior con contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/miradorImage"
+        android:background="#FFFFFF"
+        android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/miradorImage"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="Imagen del punto de interés" />
-
-        <TextView
-            android:id="@+id/miradorText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción del punto de interés"
-            android:textSize="16sp"
-            android:textColor="#333333"
-            android:lineSpacingExtra="4dp" />
+            android:orientation="vertical">
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/miradorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Área recreativa de Las Dehesas (Cercedilla)"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/miradorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inicio de la ruta. Desde aquí se accede a la Fuente de Majavilán y al comienzo de la Calzada Romana."
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:lineSpacingExtra="6dp" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
