@@ -21,7 +21,7 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polygon
 import org.osmdroid.views.overlay.Polyline
 
-class MainActivity : AppCompatActivity() {
+class Ruta : AppCompatActivity() {
 
     private lateinit var mapView: MapView
     private lateinit var dbHelper: Helper
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Configuration.getInstance().load(applicationContext, getPreferences(MODE_PRIVATE))
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ruta)
 
         rutaId = intent.getIntExtra("rutaId", -1)
         if (rutaId == -1) {
@@ -81,16 +81,23 @@ class MainActivity : AppCompatActivity() {
 
         mapView.setTileSource(tileSources[currentTileIndex])
         mapView.setMultiTouchControls(true)
-        mapView.controller.setZoom(15.0)
+        mapView.controller.setZoom(16.0)
 
         mostrarRuta(rutaId)
         mostrarPuntosDeInteres(rutaId)
 
         changeMapButton.setOnClickListener {
-            currentTileIndex = (currentTileIndex + 1) % tileSources.size
-            mapView.setTileSource(tileSources[currentTileIndex])
+            // Avanzar al siguiente índice válido
+            do {
+                currentTileIndex = (currentTileIndex + 1) % tileSources.size
+            } while (currentTileIndex == 1) // Saltar el índice 1 (USGS_TOPO)
+
+            val newTileSource = tileSources[currentTileIndex]
+            mapView.setTileSource(newTileSource)
+            mapView.tileProvider.clearTileCache()
             mapView.invalidate()
         }
+
 
         toggleFaunaButton.setOnClickListener {
             val mostrar = faunaScroll.visibility == View.GONE
@@ -109,7 +116,7 @@ class MainActivity : AppCompatActivity() {
     private fun mostrarRuta(rutaId: Int) {
         val puntosRuta = mutableListOf<GeoPoint>()
         val cursor = db.rawQuery(
-            "SELECT latitud, longitud FROM puntos_ruta WHERE id_ruta = ?",
+            "SELECT latitud, longitud FROM puntos_ruta WHERE rutaId = ?",
             arrayOf(rutaId.toString())
         )
 
@@ -190,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             especiesConPuntos.getOrPut(nombre) { mutableListOf() }.add(punto)
 
             if (!coloresEspecie.containsKey(nombre)) {
-                coloresEspecie[nombre] = generarColorAleatorio()
+                coloresEspecie[nombre] = Color.GREEN
             }
         }
         cursor.close()
@@ -230,13 +237,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun generarColorAleatorio(): Int {
-        val r = (80..200).random()
-        val g = (80..200).random()
-        val b = (80..200).random()
-        return Color.rgb(r, g, b)
-    }
-
     private fun resizeDrawable(drawable: Drawable?, width: Int, height: Int): Drawable? {
         if (drawable == null) return null
 
@@ -260,7 +260,7 @@ class MainActivity : AppCompatActivity() {
             val fotoNombre = cursor.getString(cursor.getColumnIndex("foto")) ?: "ic_mirador"
             val imagenId = resources.getIdentifier(fotoNombre, "drawable", packageName).takeIf { it != 0 } ?: R.drawable.ic_mirador
 
-            val intent = Intent(this@MainActivity, PuntoDeInteres::class.java).apply {
+            val intent = Intent(this@Ruta, PuntoDeInteres::class.java).apply {
                 putExtra("nombre", nombre)
                 putExtra("descripcion", descripcion)
                 putExtra("foto", imagenId)

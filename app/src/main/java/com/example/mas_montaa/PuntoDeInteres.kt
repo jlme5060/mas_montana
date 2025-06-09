@@ -9,7 +9,7 @@ class PuntoDeInteres : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_punto_de_interes)
-
+        //valores pasadosal pulsar
         val nombre = intent.getStringExtra("nombre") ?: "Nombre desconocido"
         val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción disponible"
         val imagenId = intent.getIntExtra("foto", R.drawable.ic_mirador)

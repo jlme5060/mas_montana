@@ -19,11 +19,11 @@
         android:theme="@style/Theme.MasMontaa"
         tools:targetApi="31">
 
-        <!-- Actividad principal -->
+        <!-- ✅ Nueva pantalla de inicio como actividad principal -->
         <activity
-            android:name=".ProvinciaSelectionActivity"
+            android:name=".InicioActivity"
             android:exported="true"
-            android:label="Mapa de España"
+            android:label="Inicio"
             android:theme="@style/Theme.MasMontaa">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,16 +31,23 @@
             </intent-filter>
         </activity>
 
+        <!-- Pantalla de selección de provincia -->
+        <activity
+            android:name=".SelecionadorProvincia"
+            android:exported="true"
+            android:label="Mapa de España"
+            android:theme="@style/Theme.MasMontaa" />
+
         <!-- Pantalla de selección de ruta -->
         <activity
-            android:name=".RouteSelectionActivity"
+            android:name=".SelecionadorRuta"
             android:exported="true"
             android:label="Seleccionar Ruta"
             android:theme="@style/Theme.MasMontaa" />
 
         <!-- Actividad del mapa -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Ruta"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MasMontaa" />

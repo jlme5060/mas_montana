@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class ProvinciaSelectionActivity : AppCompatActivity() {
+class SelecionadorProvincia : AppCompatActivity() {
 
     private lateinit var tvComunidad: TextView
     private lateinit var ivImagen: ImageView
@@ -20,7 +20,7 @@ class ProvinciaSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_provincia_selection)
+        setContentView(R.layout.activity_slecionador_provincia)
 
         tvComunidad = findViewById(R.id.tvComunidad)
         ivImagen = findViewById(R.id.ivImagen)
@@ -43,7 +43,7 @@ class ProvinciaSelectionActivity : AppCompatActivity() {
         }
 
         ivImagen.setOnClickListener {
-            val intent = Intent(this, RouteSelectionActivity::class.java)
+            val intent = Intent(this, SelecionadorRuta::class.java)
             intent.putExtra("provincia", provincias[indiceActual])
             startActivity(intent)
         }

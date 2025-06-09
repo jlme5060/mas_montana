@@ -4,15 +4,16 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <!-- Imagen destacada en la parte superior -->
+    <!-- Imagen destacada ocupa todo el ancho y 300dp de alto -->
     <ImageView
         android:id="@+id/miradorImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:contentDescription="Imagen del punto de interés" />
 
-    <!-- Contenedor inferior con contenido -->
+    <!-- Contenido debajo de la imagen -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

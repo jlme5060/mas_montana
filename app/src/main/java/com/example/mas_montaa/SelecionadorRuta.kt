@@ -3,13 +3,12 @@ package com.example.mas_montaa
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
-class RouteSelectionActivity : AppCompatActivity() {
+class SelecionadorRuta : AppCompatActivity() {
 
     private lateinit var dbHelper: Helper
     private lateinit var linearLayout: LinearLayout
@@ -17,7 +16,7 @@ class RouteSelectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_route_selection)
+        setContentView(R.layout.activity_selecionador_ruta)
 
         linearLayout = findViewById(R.id.linearLayout)
         scrollView = findViewById(R.id.scrollRuta)
@@ -43,7 +42,9 @@ class RouteSelectionActivity : AppCompatActivity() {
             val altitud = cursorRutas.getDouble(cursorRutas.getColumnIndexOrThrow("altitudMax"))
             val desnivel = cursorRutas.getDouble(cursorRutas.getColumnIndexOrThrow("desnivel"))
             val estrellas = cursorRutas.getInt(cursorRutas.getColumnIndexOrThrow("estrellas"))
-
+            val duracion = cursorRutas.getString(cursorRutas.getColumnIndexOrThrow("duracion"))
+            val dificultad = cursorRutas.getString(cursorRutas.getColumnIndexOrThrow("dificultad"))
+            val epoca_recomendada = cursorRutas.getString(cursorRutas.getColumnIndexOrThrow("epoca_recomendada"))
             // --- CARD CON SOMBRA Y BORDES REDONDEADOS ---
             val cardView = CardView(this).apply {
                 radius = 18f
@@ -110,7 +111,10 @@ class RouteSelectionActivity : AppCompatActivity() {
                 "Distancia: $longitud km",
                 "Altitud Máx: $altitud m",
                 "Desnivel: $desnivel m",
-                "Estrellas: $estrellas / 5"
+                "Estrellas: $estrellas / 5",
+                "duracion: $duracion",
+                "dificultad: $dificultad ",
+                "epoca_recomendada: $epoca_recomendada "
             )
             for (dato in detalles) {
                 datosColumna.addView(TextView(this).apply {
@@ -129,7 +133,7 @@ class RouteSelectionActivity : AppCompatActivity() {
             }
 
             val cursorFauna = db.rawQuery(
-                "SELECT nombre FROM puntos_interes WHERE rutaId = ? AND tipo = 'fauna'",
+                "SELECT nombre FROM puntos_interes WHERE rutaId = ? AND (tipo = 'fauna' OR tipo = 'flora') limit 5",
                 arrayOf(idRuta.toString())
             )
 
@@ -171,7 +175,7 @@ class RouteSelectionActivity : AppCompatActivity() {
                     setMargins(0, 18, 0, 0)
                 }
                 setOnClickListener {
-                    val intent = Intent(this@RouteSelectionActivity, MainActivity::class.java)
+                    val intent = Intent(this@SelecionadorRuta, Ruta::class.java)
                     intent.putExtra("rutaId", idRuta)
                     startActivity(intent)
                 }
